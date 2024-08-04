@@ -1,12 +1,14 @@
 use iced::{
     widget::{Button, Column, Row, Slider, Text},
-    Element, Sandbox,
+    Element, Task,
 };
 use iced_video_player::{Video, VideoPlayer};
 use std::time::Duration;
 
 fn main() {
-    App::run(Default::default()).unwrap();
+    iced::application(App::title, App::update, App::view)
+        .run_with(App::new);
+    //App::run(Default::default()).unwrap();
 }
 
 #[derive(Clone, Debug)]
@@ -25,10 +27,9 @@ struct App {
     dragging: bool,
 }
 
-impl Sandbox for App {
-    type Message = Message;
+impl App {
 
-    fn new() -> Self {
+    fn new() -> (Self, Task<Message>) {
         let video = Video::new(
             &url::Url::from_file_path(
                 std::path::PathBuf::from(file!())
@@ -42,11 +43,16 @@ impl Sandbox for App {
             false,
         )
         .unwrap();
-        App {
-            video,
-            position: 0.0,
-            dragging: false,
-        }
+    
+        (
+            App {
+                video,
+                position: 0.0,
+                dragging: false,
+            },
+
+            Task::none()
+        )
     }
 
     fn title(&self) -> String {

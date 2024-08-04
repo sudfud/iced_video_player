@@ -1,4 +1,5 @@
-use iced_wgpu::primitive::pipeline::Primitive;
+use iced_wgpu::graphics::Viewport;
+use iced_wgpu::primitive::Primitive;
 use iced_wgpu::wgpu;
 use std::{
     collections::BTreeMap,
@@ -288,13 +289,13 @@ impl VideoPrimitive {
 impl Primitive for VideoPrimitive {
     fn prepare(
         &self,
-        format: wgpu::TextureFormat,
         device: &wgpu::Device,
         queue: &wgpu::Queue,
-        bounds: iced::Rectangle,
-        _target_size: iced::Size<u32>,
-        _scale_factor: f32,
-        storage: &mut iced_wgpu::primitive::pipeline::Storage,
+        format: wgpu::TextureFormat,
+        storage: &mut iced_wgpu::primitive::Storage,
+        bounds: &iced::Rectangle,
+        viewport: &Viewport
+
     ) {
         if !storage.has::<VideoPipeline>() {
             storage.store(VideoPipeline::new(device, format));
@@ -312,18 +313,17 @@ impl Primitive for VideoPrimitive {
             );
         }
 
-        pipeline.prepare(queue, self.video_id, bounds);
+        pipeline.prepare(queue, self.video_id, *bounds);
     }
 
     fn render(
         &self,
-        storage: &iced_wgpu::primitive::pipeline::Storage,
-        target: &wgpu::TextureView,
-        _target_size: iced::Size<u32>,
-        viewport: iced::Rectangle<u32>,
         encoder: &mut wgpu::CommandEncoder,
+        storage: &iced_wgpu::primitive::Storage,
+        target: &wgpu::TextureView,
+        clip_bounds: &iced::Rectangle<u32>
     ) {
         let pipeline = storage.get::<VideoPipeline>().unwrap();
-        pipeline.draw(target, encoder, viewport, self.video_id);
+        pipeline.draw(target, encoder, *clip_bounds, self.video_id);
     }
 }

@@ -164,11 +164,14 @@ impl Video {
         let frame_buf = vec![0; (width * height * 4) as _];
         let frame = Arc::new(Mutex::new(frame_buf));
         let frame_ref = Arc::clone(&frame);
+        let preroll_frame_ref = Arc::clone(&frame);
 
         let upload_frame = Arc::new(AtomicBool::new(true));
         let upload_frame_ref = Arc::clone(&upload_frame);
+        let preroll_upload_frame_ref = Arc::clone(&upload_frame);
 
         let (notify, wait) = mpsc::channel();
+        let preroll_notify = notify.clone();
 
         app_sink.set_callbacks(
             gst_app::AppSinkCallbacks::builder()
@@ -185,6 +188,23 @@ impl Video {
                     upload_frame_ref.store(true, Ordering::SeqCst);
 
                     notify.send(()).map_err(|_| gst::FlowError::Error)?;
+
+                    Ok(gst::FlowSuccess::Ok)
+                })
+                .new_preroll(move |sink| {
+                    let preroll = sink.pull_preroll().map_err(|_| gst::FlowError::Error)?;
+                    let buffer = preroll.buffer().ok_or(gst::FlowError::Error)?;
+                    let map = buffer.map_readable().map_err(|_| gst::FlowError::Error)?;
+
+                    preroll_frame_ref
+                        .lock()
+                        .map_err(|_| gst::FlowError::Error)?
+                        .copy_from_slice(map.as_slice());
+
+
+                    preroll_upload_frame_ref.store(true, Ordering::SeqCst);
+
+                    preroll_notify.clone().send(()).map_err(|_| gst::FlowError::Error)?;
 
                     Ok(gst::FlowSuccess::Ok)
                 })
@@ -323,7 +343,7 @@ impl Video {
                 // maybe in a small window between seek and wait the old frame comes in?
                 inner.wait.recv().map_err(|_| Error::Sync)?;
                 inner.wait.recv().map_err(|_| Error::Sync)?;
-                Ok(img::Handle::from_pixels(
+                Ok(img::Handle::from_rgba(
                     inner.width as _,
                     inner.height as _,
                     self.0
