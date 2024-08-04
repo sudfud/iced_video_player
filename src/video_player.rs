@@ -4,6 +4,7 @@ use iced::{
     advanced::{self, graphics::core::event::Status, layout, widget, Widget},
     Element,
 };
+//use iced_wgpu::primitive::pipeline::Renderer as PrimitiveRenderer;
 use iced_wgpu::primitive::Renderer as PrimitiveRenderer;
 use std::{marker::PhantomData, sync::atomic::Ordering};
 use std::{sync::Arc, time::Duration};
@@ -123,7 +124,10 @@ where
         let mut inner = self.video.0.borrow_mut();
 
         if let iced::Event::Window(iced::window::Event::RedrawRequested(now)) = event {
-            if inner.restart_stream || (!inner.is_eos && !inner.paused) {
+            // This statement originally checked if eos and paused are both false.
+            // The pause check was removed so that the frame can be updated while paused.
+            // Might need to add something to prevent redundant redraws - sud
+            if inner.restart_stream || (!inner.is_eos) {
                 let mut restart_stream = false;
                 if inner.restart_stream {
                     restart_stream = true;
