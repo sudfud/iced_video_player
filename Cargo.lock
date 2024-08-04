@@ -1760,7 +1760,6 @@ dependencies = [
  "iced_wgpu",
  "thiserror",
  "url",
- "web-sys",
 ]
 
 [[package]]

@@ -28,7 +28,6 @@ gstreamer-app = "0.22" # appsink
 glib = "0.19" # gobject traits and error type
 thiserror = "1" 
 url = "2" # media uri
-web-sys = "0.3.69"
 
 [package.metadata.nix]
 systems = ["x86_64-linux"]
