@@ -1,5 +1,4 @@
-use iced_wgpu::graphics::Viewport;
-use iced_wgpu::primitive::Primitive;
+use iced_wgpu::{graphics::Viewport, primitive::Primitive};
 use iced_wgpu::wgpu;
 use std::{
     collections::BTreeMap,

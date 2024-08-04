@@ -92,6 +92,10 @@ impl Internal {
         if self.is_eos && !paused {
             self.restart_stream = true;
         }
+
+        // Wait for the state change to complete. 
+        // This prevents graphical issues while seeking. - sud
+        let _ = self.source.state(gst::ClockTime::NONE);
     }
 }
 
