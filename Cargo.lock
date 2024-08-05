@@ -1013,15 +1013,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "find-crate"
-version = "0.6.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "59a98bbaacea1c0eb6a0876280051b892eb73594fd90cf3b20e9c817029c57d2"
-dependencies = [
- "toml 0.5.11",
-]
-
-[[package]]
 name = "flate2"
 version = "1.0.28"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1425,9 +1416,9 @@ dependencies = [
 
 [[package]]
 name = "gstreamer"
-version = "0.22.1"
+version = "0.22.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c6948444004e5ddf3d735d9a3e9968948675c6bceb7f4b56e9dc12d2ff4440c1"
+checksum = "5ca0b90646bb67fccf80d228f5333f2a0745526818ccefbf5a97326c76d30e4d"
 dependencies = [
  "cfg-if",
  "futures-channel",
@@ -1450,9 +1441,9 @@ dependencies = [
 
 [[package]]
 name = "gstreamer-app"
-version = "0.22.0"
+version = "0.22.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "50184e88d3462a796a5924fb329839c102b22f9383c1636323fa4ef5255dea92"
+checksum = "1363313eb1931d66ac0b82c9b477fdd066af9dc118ea844966f85b6d99f261fd"
 dependencies = [
  "futures-core",
  "futures-sink",
@@ -1598,24 +1589,13 @@ name = "iced"
 version = "0.13.0-dev"
 source = "git+https://github.com/iced-rs/iced.git#145c3dc8fc4f92c400fbc3f8202ed22e1d498663"
 dependencies = [
- "iced_core 0.13.0-dev",
- "iced_futures 0.13.0-dev",
+ "iced_core",
+ "iced_futures",
  "iced_renderer",
  "iced_widget",
  "iced_winit",
  "image",
  "thiserror",
-]
-
-[[package]]
-name = "iced_core"
-version = "0.9.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "11e1942e28dedee756cc27e67e7a838cdc1e59fb6bf9627ec9f709ab3b135782"
-dependencies = [
- "bitflags 1.3.2",
- "instant",
- "palette 0.6.1",
 ]
 
 [[package]]
@@ -1630,7 +1610,7 @@ dependencies = [
  "log",
  "num-traits",
  "once_cell",
- "palette 0.7.4",
+ "palette",
  "rustc-hash 2.0.0",
  "smol_str",
  "thiserror",
@@ -1639,23 +1619,11 @@ dependencies = [
 
 [[package]]
 name = "iced_futures"
-version = "0.6.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "215d51fa4f70dbb63775d7141243c4d98d4d525d8949695601f8fbac7dcbc04e"
-dependencies = [
- "futures",
- "log",
- "wasm-bindgen-futures",
- "wasm-timer",
-]
-
-[[package]]
-name = "iced_futures"
 version = "0.13.0-dev"
 source = "git+https://github.com/iced-rs/iced.git#145c3dc8fc4f92c400fbc3f8202ed22e1d498663"
 dependencies = [
  "futures",
- "iced_core 0.13.0-dev",
+ "iced_core",
  "log",
  "rustc-hash 2.0.0",
  "wasm-bindgen-futures",
@@ -1671,8 +1639,8 @@ dependencies = [
  "bytemuck",
  "cosmic-text",
  "half",
- "iced_core 0.13.0-dev",
- "iced_futures 0.13.0-dev",
+ "iced_core",
+ "iced_futures",
  "image",
  "kamadak-exif",
  "log",
@@ -1680,21 +1648,6 @@ dependencies = [
  "raw-window-handle",
  "rustc-hash 2.0.0",
  "thiserror",
- "unicode-segmentation",
-]
-
-[[package]]
-name = "iced_native"
-version = "0.10.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d012eb06da490fe46a695b39721c20da9643f35cf2ecb9d30618fdeb96170616"
-dependencies = [
- "iced_core 0.9.0",
- "iced_futures 0.6.0",
- "iced_style",
- "num-traits",
- "thiserror",
- "twox-hash",
  "unicode-segmentation",
 ]
 
@@ -1716,21 +1669,10 @@ version = "0.13.0-dev"
 source = "git+https://github.com/iced-rs/iced.git#145c3dc8fc4f92c400fbc3f8202ed22e1d498663"
 dependencies = [
  "bytes",
- "iced_core 0.13.0-dev",
- "iced_futures 0.13.0-dev",
+ "iced_core",
+ "iced_futures",
  "raw-window-handle",
  "thiserror",
-]
-
-[[package]]
-name = "iced_style"
-version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0e37333dc2991201140302cd0d4cea051bd37ca3671d5008ec85df86d232ff30"
-dependencies = [
- "iced_core 0.9.0",
- "once_cell",
- "palette 0.6.1",
 ]
 
 [[package]]
@@ -1756,7 +1698,6 @@ dependencies = [
  "gstreamer",
  "gstreamer-app",
  "iced",
- "iced_native",
  "iced_wgpu",
  "thiserror",
  "url",
@@ -1800,7 +1741,7 @@ name = "iced_winit"
 version = "0.13.0-dev"
 source = "git+https://github.com/iced-rs/iced.git#145c3dc8fc4f92c400fbc3f8202ed22e1d498663"
 dependencies = [
- "iced_futures 0.13.0-dev",
+ "iced_futures",
  "iced_graphics",
  "iced_runtime",
  "log",
@@ -1863,9 +1804,9 @@ dependencies = [
 
 [[package]]
 name = "itertools"
-version = "0.12.1"
+version = "0.13.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ba291022dbbd398a455acf126c1e341954079855bc60dfdda641363bd6922569"
+checksum = "413ee7dfc52ee1a4949ceeb7dbc8a33f2d6c088194d9f922fb8318faf1f01186"
 dependencies = [
  "either",
 ]
@@ -2538,38 +2479,14 @@ dependencies = [
 
 [[package]]
 name = "palette"
-version = "0.6.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8f9cd68f7112581033f157e56c77ac4a5538ec5836a2e39284e65bd7d7275e49"
-dependencies = [
- "approx",
- "num-traits",
- "palette_derive 0.6.1",
- "phf",
-]
-
-[[package]]
-name = "palette"
 version = "0.7.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3d38e6e5ca1612e2081cc31188f08c3cba630ce4ba44709a153f1a0f38d678f2"
 dependencies = [
  "approx",
  "fast-srgb8",
- "palette_derive 0.7.4",
+ "palette_derive",
  "phf",
-]
-
-[[package]]
-name = "palette_derive"
-version = "0.6.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "05eedf46a8e7c27f74af0c9cfcdb004ceca158cb1b918c6f68f8d7a549b3e427"
-dependencies = [
- "find-crate",
- "proc-macro2",
- "quote",
- "syn 1.0.109",
 ]
 
 [[package]]
@@ -3313,7 +3230,7 @@ dependencies = [
  "cfg-expr",
  "heck",
  "pkg-config",
- "toml 0.8.10",
+ "toml",
  "version-compare",
 ]
 
@@ -3431,15 +3348,6 @@ checksum = "1f3ccbac311fea05f86f61904b462b55fb3df8837a366dfc601a0161d0532f20"
 
 [[package]]
 name = "toml"
-version = "0.5.11"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f4f7f0dd8d50a853a531c426359045b1998f04219d88799810762cd4ad314234"
-dependencies = [
- "serde",
-]
-
-[[package]]
-name = "toml"
 version = "0.8.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9a9aad4a3066010876e8dcf5a8a06e70a558751117a145c6ce2b82c2e2054290"
@@ -3525,16 +3433,6 @@ name = "ttf-parser"
 version = "0.21.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2c591d83f69777866b9126b24c6dd9a18351f177e49d625920d19f989fd31cf8"
-
-[[package]]
-name = "twox-hash"
-version = "1.6.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "97fee6b57c6a41524a810daee9286c02d7752c4253064d0b05472833a438f675"
-dependencies = [
- "cfg-if",
- "static_assertions",
-]
 
 [[package]]
 name = "typenum"

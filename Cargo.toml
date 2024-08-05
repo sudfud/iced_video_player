@@ -21,10 +21,9 @@ path = "examples/minimal.rs"
 
 [dependencies]
 iced = { git = "https://github.com/iced-rs/iced.git", features = ["image", "advanced", "wgpu"] } 
-iced_native = "0.10"
 iced_wgpu = { git = "https://github.com/iced-rs/iced.git" }
-gstreamer = "0.22" 
-gstreamer-app = "0.22" # appsink 
+gstreamer = "0.22.6" 
+gstreamer-app = {version = "0.22.6", features = ["v1_20"]} # appsink 
 glib = "0.19" # gobject traits and error type
 thiserror = "1" 
 url = "2" # media uri
