@@ -20,8 +20,8 @@ name = "minimal_example"
 path = "examples/minimal.rs"
 
 [dependencies]
-iced = { git = "https://github.com/iced-rs/iced.git", features = ["image", "advanced", "wgpu"] } 
-iced_wgpu = { git = "https://github.com/iced-rs/iced.git" }
+iced = { version="0.13.1", features = ["image", "advanced", "wgpu"] } 
+iced_wgpu = "0.13.1"
 gstreamer = "0.22.6" 
 gstreamer-app = {version = "0.22.6", features = ["v1_20"]} # appsink 
 glib = "0.19" # gobject traits and error type
