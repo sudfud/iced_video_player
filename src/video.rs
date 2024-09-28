@@ -65,7 +65,7 @@ pub(crate) struct Internal {
 impl Internal {
     pub(crate) fn seek(&self, position: impl Into<Position>) -> Result<(), Error> {
         self.source.seek_simple(
-            gst::SeekFlags::union(gst::SeekFlags::FLUSH, gst::SeekFlags::KEY_UNIT),
+            gst::SeekFlags::FLUSH,
             gst::GenericFormattedValue::from(position.into()),
         )?;
         Ok(())
